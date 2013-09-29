@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe 'vmware_fusion' do
   it do
-    should contain_package('VMware Fusion').with({
-      :source   => 'https://s3.amazonaws.com/boxen-downloads/vmware/VMware-Fusion-5.0.3-1040386-light.dmg',
-      :provider => 'appdmg'
+    should contain_package("VMware-Fusion-6.0.1").with({
+      :provider => 'appdmg',
+      :source   => "https://dl.dropboxusercontent.com/s/6um01kj4tp0ku17/VMware-Fusion-6.0.1.dmg"
     })
   end
 end

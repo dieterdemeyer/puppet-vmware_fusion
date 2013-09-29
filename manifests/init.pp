@@ -5,9 +5,27 @@
 # Usage:
 #
 #   include vmware_fusion
-class vmware_fusion {
-  package { 'VMware Fusion':
-    source   => 'https://s3.amazonaws.com/boxen-downloads/vmware/VMware-Fusion-5.0.3-1040386-light.dmg',
-    provider => 'appdmg'
+#   class { 'vmware_fusion':
+#     version => '6.0.1'
+#   }
+#
+class vmware_fusion($version='6.0.1') {
+
+  case $version {
+    '5.0.3': {
+      $uuid = 'aiu8kpuymt6djf8'
+    }
+    '6.0.1': {
+      $uuid = '6um01kj4tp0ku17'
+    }
+    default: {
+      fail('Class[vmware_fusion]: parameter version not supported')
+    }
   }
+
+  package { "VMware-Fusion-${version}":
+    provider => 'appdmg',
+    source   => "https://dl.dropboxusercontent.com/s/${uuid}/VMware-Fusion-${version}.dmg",
+  }
+
 }
